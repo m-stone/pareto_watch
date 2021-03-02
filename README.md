@@ -2,20 +2,39 @@
 Pareto Watch old TV shows. Takes a TV show and returns the top 20% of episodes from IMDB sorted by episode number.
 
 Uses python, pandas, and IMDbPY (https://imdbpy.github.io/) -- install guide and docs here: https://imdbpy.readthedocs.io/en/latest/
+You can install IMDbPY using pip
 
 ### Example output (using Star Wars: The Clone Wars):
 
 (base) C:\Users\stone\source\repos\pythonParetoWatch>python paretowatch.py
 
-Please enter the show name: Star Wars: The Clone Wars
+Please enter the show name: star wars clone
 
-Found show with title Star Wars: The Clone Wars
+Found show with title Star Wars: Clone Wars from 2003
 
-Is this correct [Y]/n: y
+Is this correct [Y]/n: n
+
+These were the top 5 returns from IMDB:
+
+id - title - year
+
+0 - Star Wars: Clone Wars - 2003
+
+1 - Star Wars: Clone Wars - FINAL Season (My Thoughts) - 2020
+
+2 - Star Wars: The Clone Wars - 2008
+
+3 - Star Wars: The Clone Wars - 2008
+
+4 - Star Wars: Episode II - Attack of the Clones - 2002
+
+Enter the show id, or 'n' to quit:2
+
+Fetching episode ratings. . .
 
 There are 133 episodes of Star Wars: The Clone Wars
 
-You should Pareto watch these 26 episodes:
+You should Pareto watch these 27 episodes:
 
 			 episode_title 	episode_rating  season  season_ep_number  abs_ep_number
 
