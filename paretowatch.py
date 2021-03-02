@@ -19,6 +19,9 @@ https://imdbpy.readthedocs.io/en/latest/search.html?q=episodes&check_keywords=ye
 
 from imdb import IMDb
 import pandas as pd
+import datetime
+
+today = datetime.datetime.now()
 
 ia = IMDb()
 
@@ -36,6 +39,7 @@ if check == 'n':
     print('quitting')
 else:
     #update to relfect its a tv show
+    print('Fetching episode ratings. . .')
     ia.update(showobj,'episodes')
     # calculate number of episodes
     num_episodes = showobj['episodes number']
@@ -60,11 +64,21 @@ else:
     for season_number in episodes:
         #iter through eps in season
         for ep_num in episodes[season_number]:
-            # updata data dict
+            # have to check to make sure episode has already aired!!
+            ep_date = episodes[season_number][ep_num]['original air date'].replace('.','')
+            if (len(ep_date) <= 4): # future episode with unformatted date
+                ep_date = datetime.datetime.strptime('9999','%Y')
+            else:
+                ep_date = datetime.datetime.strptime(ep_date,'%d %b %Y')
+            # update data dict
             # episode title
             data['episode_title'].append(episodes[season_number][ep_num]['title'])
             # episode rating
-            data['episode_rating'].append(episodes[season_number][ep_num]['rating'])
+            # if unaired, set rating to 0.0
+            if ep_date > today:
+                data['episode_rating'].append(0.0)
+            else:
+                data['episode_rating'].append(episodes[season_number][ep_num]['rating'])
             # season number
             data['season'].append(season_number)
             # season ep number
