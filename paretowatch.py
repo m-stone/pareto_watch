@@ -3,15 +3,19 @@
 From:
 https://www.reddit.com/r/slatestarcodex/comments/fzuk1v/pareto_watch_of_old_tv_shows/
 
-Look up show on IMDB. Find title code - should be something similar to tt0103359 in the url, format typically www.imdb.com/title/tt0103359/
-Goto show sort: https://www.imdb.com/search/title/?series=tt0103359&sort=user_rating,desc&count=250&view=simple and replace series=ttxxxxxx& with the series code. 
-Calculate the 20% episode number, and find the rating.Ex: Batman TAS has 85 episodes, episode 17 is 20% of the way thru, and the 17th episode down in ratings is rated at 8.5.
+Look up show on IMDB. Find title code - should be something similar to tt0103359 in the url,
+format typically www.imdb.com/title/tt0103359/
+Goto show sort: 
+https://www.imdb.com/search/title/?series=tt0103359&sort=user_rating,desc&count=250&view=simple 
+and replace series=ttxxxxxx& with the series code. 
+Calculate the 20% episode number, and find the rating.
+Ex: Batman TAS has 85 episodes, episode 17 is 20% of the way thru, 
+and the 17th episode down in ratings is rated at 8.5.
 Use ratinggraph.com and watch all episodes 8.5+ in chronological order.
 Watch finale no matter what to get conclusion.
 
 Test with:
 Star Wars: The Clone Wars
-
 
 imdb library docs:
 https://imdbpy.readthedocs.io/en/latest/search.html?q=episodes&check_keywords=yes&area=default
@@ -33,11 +37,23 @@ shows = ia.search_movie(show_name)
 # ok set up our object
 showobj = shows[0]
 #double check
-print('Found show with title {}'.format(showobj['title']))
+print('Found show with title {} from {}'.format(showobj['title'],showobj['year']))
 check = input('Is this correct [Y]/n: ')
+if check == 'n':
+    # show the top 3 returns and allow to choose or quit
+    print('These were the top 5 returns from IMDB:')
+    print('id - title - year')
+    for i in range(5):
+        print('{} - {} - {}'.format(i,shows[i]['title'],shows[i]['year']))
+    check = input('Enter the show id, or \'n\' to quit:')
+    if check != 'n':
+        check = int(check)
+else:
+    check = 0
 if check == 'n':
     print('quitting')
 else:
+    showobj = shows[check]
     #update to relfect its a tv show
     print('Fetching episode ratings. . .')
     ia.update(showobj,'episodes')
@@ -47,9 +63,6 @@ else:
     
     print('There are {} episodes of {}'.format(num_episodes,showobj['title']))
     print('You should Pareto watch these {} episodes:'.format(eps_to_watch+1))    
-    
-    episode = showobj['episodes'][1][1]
-    episode['rating']
     
     episodes = showobj['episodes']
     # ok so need to construct a df with episode title, episode rating, season #, ep #
