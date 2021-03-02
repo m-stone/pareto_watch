@@ -42,7 +42,7 @@ else:
     eps_to_watch = int(round(num_episodes / 5,0))-1
     
     print('There are {} episodes of {}'.format(num_episodes,showobj['title']))
-    print('You should Pareto watch these {} episodes:'.format(eps_to_watch))    
+    print('You should Pareto watch these {} episodes:'.format(eps_to_watch+1))    
     
     episode = showobj['episodes'][1][1]
     episode['rating']
