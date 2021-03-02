@@ -17,7 +17,7 @@ There are 133 episodes of Star Wars: The Clone Wars
 
 You should Pareto watch these 26 episodes:
 
-		episode_title  episode_rating  season  season_ep_number  abs_ep_number
+			 episode_title 	episode_rating  season  season_ep_number  abs_ep_number
 
 	24                Nightsisters        8.701235       3                12             56
 	21                     Monster        8.801235       3                13             57
